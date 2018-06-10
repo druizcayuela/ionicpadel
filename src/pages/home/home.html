@@ -1,14 +1,33 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
+    <ion-navbar color="secondary">
+        <ion-title text-center>
+            Play Padel
+        </ion-title>
+        <ion-buttons>
+            <button ion-button icon-only (click)="mostrarMenu()">
+                <ion-icon name="menu"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content class="vertical-align-content" text-center>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <button ion-button icon-left block color="secondary" (click)="navegarPagina()">
+                  <ion-icon name="paper"></ion-icon>
+                  Organiza una clase
+                </button>
+                <button ion-button icon-left block color="secondary" (click)="showAlert()">
+                  <ion-icon name="calendar"></ion-icon>
+                  Organiza un partido
+                </button>
+                <button ion-button icon-left block color="secondary" (click)="showAlert()">
+                  <ion-icon name="create"></ion-icon>
+                  Reserva una pista
+                </button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

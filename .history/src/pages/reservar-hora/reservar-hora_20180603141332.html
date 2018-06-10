@@ -1,0 +1,27 @@
+<ion-header>
+
+    <ion-navbar color="secondary">
+        <ion-title>Organizar una clase</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+        <ion-list-header>
+            Elige una hora
+        </ion-list-header>
+        <ion-item-group>
+            <ion-item-divider *ngFor="let horario of horarios | async" color="light"> {{ horario.fecha }}</ion-item-divider>
+            <ion-item>Angola</ion-item>
+            <ion-item>Argentina</ion-item>
+        </ion-item-group>
+
+
+        <!-- <button detail-none ion-item *ngFor="let horario of horarios | async">
+            {{ horario.fecha }} {{ horario.hora }}
+        </button> -->
+
+    </ion-list>
+</ion-content>

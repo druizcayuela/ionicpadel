@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-navbar color="secondary">
+        <ion-title text-center>
+            Cerrar sesion
+        </ion-title>
+        <ion-buttons>
+            <button ion-button icon-only (click)="mostrarMenu()">
+              <ion-icon name="menu"></ion-icon>
+          </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="vertical-align-content" text-center>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <h2>Cerrar sesion</h2>
+                <p>Pulsa el boton para cerrar sesion</p>
+                <button ion-button icon-left block color="danger" (click)="salir()">
+                  <ion-icon name="exit"></ion-icon>
+                  Cerrar sesion
+                </button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

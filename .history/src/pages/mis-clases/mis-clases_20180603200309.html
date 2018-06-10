@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-navbar color="secondary">
+        <ion-title text-center>
+            Mis Clases
+        </ion-title>
+        <ion-buttons>
+            <button ion-button icon-only (click)="mostrarMenu()">
+                <ion-icon name="menu"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-item *ngFor="let clase of clases | async">
+        <ion-avatar item-start>
+            <img [src]="clase.img">
+        </ion-avatar>
+        <h2>Venkman</h2>
+        <p>Back off man, I'm a scientist.</p>
+    </ion-item>
+</ion-content>

@@ -1,0 +1,35 @@
+<ion-header>
+
+    <ion-navbar color="secondary">
+        <ion-title>Organizar una clase</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+        <ion-list-header>
+            Elige una hora
+        </ion-list-header>
+        <ion-item-group *ngFor="let horario of horarios | async">
+
+            <ion-item-divider color="light"> {{ horario.fecha }}</ion-item-divider>
+
+            <button detail-none ion-item *ngIf="horario.submenu.nueve.hora && horario.submenu.nueve.idAlumno == -1" (click)="seleccionarHora(horario.fecha, horario.submenu.nueve.hora)">
+                    {{ horario.submenu.nueve.hora }}
+            </button>
+            <button detail-none ion-item *ngIf="horario.submenu.diez.hora && horario.submenu.diez.idAlumno == -1" (click)="seleccionarHora(horario.fecha, horario.submenu.diez.hora)">
+                    {{ horario.submenu.diez.hora }}
+            </button>
+            <button detail-none ion-item *ngIf="horario.submenu.once.hora && horario.submenu.once.idAlumno == -1" (click)="seleccionarHora(horario.fecha, horario.submenu.once.hora)">
+                    {{ horario.submenu.once.hora }}
+            </button>
+            <button detail-none ion-item *ngIf="horario.submenu.doce.hora && horario.submenu.doce.idAlumno == -1" (click)="seleccionarHora(horario.fecha, horario.submenu.doce.hora)">
+                    {{ horario.submenu.doce.hora }}
+            </button>
+
+        </ion-item-group>
+
+    </ion-list>
+</ion-content>

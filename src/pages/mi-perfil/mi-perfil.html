@@ -1,0 +1,66 @@
+<ion-header>
+
+    <ion-navbar color="secondary" no-border-bottom>
+        <ion-title text-center>
+            Mis Perfil
+        </ion-title>
+        <ion-buttons>
+            <button ion-button icon-only (click)="mostrarMenu()">
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        </ion-buttons>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-card>
+        <img [src]="perfil.imagen" />
+        <ion-card-content>
+            <ion-card-title>
+                {{perfil.nombre}}
+            </ion-card-title>
+        </ion-card-content>
+
+        <ion-item>
+            <ion-icon name='mail' item-start></ion-icon>
+            <span class="nowrap">{{perfil.email}}</span>
+        </ion-item>
+
+        <form [formGroup]="myForm" (ngSubmit)="saveData()">
+            <ion-list>
+                <ion-item>
+                    <ion-icon name="person" item-start></ion-icon>
+                    <ion-label floating>Nombre: *</ion-label>
+                    <ion-input formControlName="nombre" type="text" placeholder="Nombre"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-icon name="person" item-start></ion-icon>
+                    <ion-label floating>Apellidos:</ion-label>
+                    <ion-input formControlName="apellidos" type="text" placeholder="Apellidos"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-icon name="call" item-start></ion-icon>
+                    <ion-label floating>Telefono: *</ion-label>
+                    <ion-input formControlName="telefono" type="number" placeholder="Telefono"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-icon name="tennisball" item-start></ion-icon>
+                    <ion-label floating>Posicion de juego:</ion-label>
+                    <ion-select formControlName="posicion">
+                        <ion-option value="reves">Réves</ion-option>
+                        <ion-option value="derecha">Drive</ion-option>
+                        <ion-option value="ambas">Ambas</ion-option>
+                    </ion-select>
+                </ion-item>
+                <br />
+                <span class="campos_obligatorios">(*) Campos obligatorios</span>
+                <div padding>
+                    <button ion-button block color="secondary" type="submit" [disabled]="!myForm.valid">Guardar</button>
+                </div>
+            </ion-list>
+        </form>
+
+    </ion-card>
+</ion-content>

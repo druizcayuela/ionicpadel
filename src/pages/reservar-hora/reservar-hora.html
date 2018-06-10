@@ -1,0 +1,43 @@
+<ion-header>
+
+    <ion-navbar color="secondary">
+        <ion-title>Organizar una clase</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" refreshingSpinner="ios" refreshingText="Actualizando lista...">
+        </ion-refresher-content>
+    </ion-refresher>
+
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+
+    <ion-list>
+        <ion-list-header>
+            Elige una hora
+        </ion-list-header>
+        <ion-item-group *ngFor="let horario of horarios">
+
+            <ion-item-divider *ngIf="tieneHoraDisponible(horario.submenu)" color="light"> {{ horario.fecha }}</ion-item-divider>
+
+            <div *ngFor="let entry of horario.submenu | primerPipe">
+                <button *ngIf="entry.value.idAlumno == -1" detail-none ion-item (click)="seleccionarHora(horario.fecha, entry.key, entry.value.hora)">
+                    {{entry.value.hora}}
+                </button>
+            </div>
+
+        </ion-item-group>
+
+    </ion-list>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" [enabled]="hayMas">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+
+
+</ion-content>

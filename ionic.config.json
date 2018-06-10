@@ -1,6 +1,6 @@
 {
   "name": "padelcontact",
-  "app_id": "",
+  "app_id": "64a01ce9",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

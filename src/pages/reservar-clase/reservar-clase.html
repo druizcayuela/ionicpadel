@@ -1,0 +1,26 @@
+<ion-header>
+
+    <ion-navbar color="secondary">
+        <ion-title>Organizar una clase</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-list>
+        <ion-list-header>
+            Elige un profesor
+        </ion-list-header>
+        <button detail-none ion-item *ngFor="let profesor of profesores | async" (click)="seleccionarProfesor(profesor)">
+            {{ profesor.nombre }} {{ profesor.apellidos }}
+            <ion-icon *ngIf="checkFavorito(profesor)" name="star" item-end (click)="quitarFavorito(profesor, $event)"></ion-icon>
+            <ion-icon *ngIf="!checkFavorito(profesor)" name="star-outline" item-end (click)="agregarFavorito(profesor, $event)"></ion-icon>
+            <ion-icon name="person" item-end (click)="verDetalleProfesor(profesor, $event)"></ion-icon>
+        </button>
+
+    </ion-list>
+
+
+</ion-content>

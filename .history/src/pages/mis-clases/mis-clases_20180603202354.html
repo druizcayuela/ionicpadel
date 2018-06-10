@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-navbar color="secondary">
+        <ion-title text-center>
+            Mis Clases
+        </ion-title>
+        <ion-buttons>
+            <button ion-button icon-only (click)="mostrarMenu()">
+                <ion-icon name="menu"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-item *ngFor="let clase of clases | async">
+        <ion-avatar item-start>
+            <img class="item-avatar" [src]="clase.imgProfesor">
+        </ion-avatar>
+        <h2>{{clase.nombreProfesor}} {{clase.apellidosProfesor}}</h2>
+        <h2>{{clase.fecha}} {{clase.hora}}</h2>
+        <h2>{{clase.lugar}}</h2>
+        <button ion-button color="secondary" outline medium (click)="seleccionarHora(horario.fecha,'doce', horario.submenu.doce.hora)">
+               Cancelar clase
+        </button><br />
+        <button ion-button color="secondary" outline medium (click)="seleccionarHora(horario.fecha,'doce', horario.submenu.doce.hora)">
+                Contactar con profesor/a
+         </button>
+    </ion-item>
+</ion-content>

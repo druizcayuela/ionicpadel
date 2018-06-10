@@ -1,0 +1,90 @@
+<ion-header>
+    <ion-navbar color="secondary" no-border-bottom>
+        <ion-title text-center>
+            Mis Clases
+        </ion-title>
+        <ion-buttons>
+            <button ion-button icon-only (click)="mostrarMenu()">
+                <ion-icon name="menu"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+
+    <ion-toolbar no-border-top>
+        <ion-segment color="secondary" [(ngModel)]="estado">
+            <ion-segment-button value="pendientes">
+                En curso
+            </ion-segment-button>
+            <ion-segment-button value="finalizadas">
+                Finalizadas
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" refreshingSpinner="ios" refreshingText="Actualizando lista...">
+        </ion-refresher-content>
+    </ion-refresher>
+
+    <div [ngSwitch]="estado">
+        <ion-list *ngSwitchCase="'pendientes'">
+            <ion-item-sliding *ngFor="let clase of clases | async">
+                <ion-item *ngIf="!compararFecha(clase)">
+                    <h1>
+                        <ion-icon name="person" item-start (click)="verDetalleProfesor(clase.idProfesor)"></ion-icon>
+                        {{clase.nombreProfesor}} {{clase.apellidosProfesor}}
+                    </h1>
+                    <h1>{{clase.fecha}} {{clase.hora}}</h1>
+                    <h1>{{clase.lugar}}</h1>
+                    <button block ion-button color="secondary" outline large (click)="cancelarClase(clase)">
+                        Cancelar la clase
+                    </button>
+                    <button block ion-button color="secondary" outline large (click)="contactar(clase)">
+                        Contactar con profesor/a
+                    </button>
+                </ion-item>
+                <ion-item-options side="right">
+                    <button ion-button color="danger" (click)="cancelarClase(clase)">
+                        <ion-icon name="trash"></ion-icon>
+                        Borrar
+                    </button>
+                </ion-item-options>
+            </ion-item-sliding>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'finalizadas'">
+            <ion-item-sliding *ngFor="let clase of clases | async">
+                <ion-item *ngIf="compararFecha(clase)">
+                    <h1>
+                        <ion-icon name="person" item-start (click)="verDetalleProfesor(clase.idProfesor)"></ion-icon>
+                        {{clase.nombreProfesor}} {{clase.apellidosProfesor}}
+                    </h1>
+                    <h1>{{clase.fecha}} {{clase.hora}}</h1>
+                    <h1>{{clase.lugar}}</h1>
+                    <button block ion-button color="secondary" outline large (click)="cancelarClase(clase)">
+                        Cancelar la clase
+                    </button>
+                    <ion-item>
+                        <ion-textarea [(ngModel)]="clase.notas" color="secondary" rows="5" placeholder="Notas"></ion-textarea>
+                    </ion-item>
+                    <button (click)="guardarNotas(clase)" ion-button clear block color="secondary" icon-left>
+                        <ion-icon name="create"></ion-icon>
+                        Guardar notas 
+                    </button>
+                </ion-item>
+
+                <ion-item-options side="right">
+                    <button ion-button color="danger" (click)="cancelarClase(clase)">
+                                <ion-icon name="trash"></ion-icon>
+                                Borrar
+                            </button>
+                </ion-item-options>
+            </ion-item-sliding>
+        </ion-list>
+
+    </div>
+
+</ion-content>

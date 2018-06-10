@@ -1,1 +1,44 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="content">
+    <ion-header>
+        <ion-toolbar color="secondary">
+            <ion-title>Menu</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+        <ion-list>
+            <button ion-item (click)="abrirPagina(home)" color="secondary" detail-none>
+                <ion-icon item-start name="home"></ion-icon>
+                Inicio
+            </button>
+            <button ion-item (click)="abrirPagina(misClases)" color="secondary" detail-none>
+                <ion-icon item-start name="create"></ion-icon>
+                Mis clases
+            </button>
+            <button ion-item (click)="showAlert()" color="secondary" detail-none>
+                <ion-icon item-start name="tennisball"></ion-icon>
+                Mis partidos
+            </button>
+            <button ion-item (click)="showAlert()" color="secondary" detail-none>
+                <ion-icon item-start name="calendar"></ion-icon>
+                 Mis reservas
+            </button>
+            <button ion-item (click)="abrirPagina(miPerfil)" color="secondary" detail-none>
+                <ion-icon item-start name="person"></ion-icon>
+                 Mis perfil
+            </button>
+            <button ion-item (click)="abrirPagina(salir)" color="secondary" detail-none>
+                <ion-icon item-start name="exit"></ion-icon>
+                Cerrar Sesión
+            </button>
+        </ion-list>
+    </ion-content>
+    <ion-footer>
+        <ion-toolbar color="secondary">
+            <ion-title>Play Padel</ion-title>
+        </ion-toolbar>
+    </ion-footer>
+</ion-menu>
+
+
+<ion-nav [root]="rootPage" #content></ion-nav>

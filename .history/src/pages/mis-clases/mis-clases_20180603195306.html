@@ -1,0 +1,43 @@
+<ion-header>
+    <ion-navbar color="secondary">
+        <ion-title text-center>
+            Mis Clases
+        </ion-title>
+        <ion-buttons>
+            <button ion-button icon-only (click)="mostrarMenu()">
+                <ion-icon name="menu"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-grid *ngFor="let clase of clases | async">
+        <ion-row>
+            <ion-col class="top-20">
+                <h1>
+                    <ion-icon name="person"></ion-icon>
+                    {{clase.nombreProfesor}} {{clase.apellidosProfesor}}
+                </h1>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="top-20">
+                <h3>{{clase.fecha}} {{clase.hora}}</h3>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="top-5">
+                <h3>{{clase.lugar}}</h3>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="top-5">
+                <button (click)="cancelarClase()" ion-button color="secondary" icon-left block>
+                    <ion-icon name="checkmark-circle"></ion-icon>
+                    Cancelar clase   
+                </button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
