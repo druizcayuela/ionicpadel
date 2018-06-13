@@ -99,13 +99,11 @@ export class ReservarHoraPage {
   }
 
   getItems(ev) {
-    // Reset items back to all of the items
+   
     this.initializeItems();
 
-    // set val to the value of the ev target
     var val = ev.target.value;
 
-    // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
       this.horarios = this.horarios.filter((item) => {
         return (item.fecha.toLowerCase().indexOf(val.toLowerCase()) > -1);

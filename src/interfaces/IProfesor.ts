@@ -6,4 +6,6 @@ export interface IProfesor {
     telefono?:string;
     lugar?:string;
     id:string;
+    texto:string;
+    ciudad:string;
 }

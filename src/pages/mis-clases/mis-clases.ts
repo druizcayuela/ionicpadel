@@ -28,9 +28,6 @@ export class MisClasesPage {
     this.estado = "pendientes";
     this.clases = this.afDB.list('clases', 
             ref => ref.orderByChild('idAlumno').equalTo(this.usuario.usuario.uid)).valueChanges();
-    this.loading = this.loadingCtrl.create({
-      content: "Por favor, espere...",
-    });
   }
 
   mostrarMenu () {
@@ -65,6 +62,9 @@ export class MisClasesPage {
 
   guardarNotas(clase: IClaseReservada){
     console.log(clase.notas);
+    this.loading = this.loadingCtrl.create({
+      content: "Por favor, espere...",
+    });
     this.loading.present();
     let key = clase.idAlumno + clase.fechaId + clase.horaId;
     this.afDB.object(`/clases/${key}`).update({'notas': clase.notas}).then(()=>{
@@ -75,8 +75,8 @@ export class MisClasesPage {
   cancelarClase(clase: IClaseReservada){
     const confirm = this.alertCtrl.create({
       title: '¿Deseas borrar la clase?',
-      message: '¿Estás seguro de borrar la clase del día ' + clase.fecha + ' ' 
-      + clase.hora + ' con el profesor ' + clase.nombreProfesor + ' ' + clase.apellidosProfesor + ' ?',
+      message: '¿Estás seguro de borrar la clase del día ' + clase.fecha + ' a las ' 
+      + clase.hora + ' con ' + clase.nombreProfesor + ' ' + clase.apellidosProfesor + ' ?',
       buttons: [
         {
           text: 'Cancelar',
@@ -87,18 +87,24 @@ export class MisClasesPage {
         {
           text: 'Confirmar',
           handler: () => {
+            this.loading= this.loadingCtrl.create({
+              content: "Por favor, espere...",
+            });
             this.loading.present();
             let key = clase.idAlumno + clase.fechaId + clase.horaId;
             
             this.afDB.object(`/horario/${clase.idProfesor}/${clase.fechaId}/submenu/${clase.horaId}`)
                 .update({ idAlumno: -1})
                 .then(()=>{
-                  this.afDB.object(`/clases/${key}`).remove().then(()=>{
-                    this.loading.dismiss().then(()=>{
-                      
+                  this.afDB.object(`/clases/${key}`).remove()
+                    .then(()=>{
+                        this.loading.dismiss();
+                      }).catch((error)=>{
+                          console.log("Error al borrar las clases: " + JSON.stringify(error))
                     });
-                  });
-                }); 
+              }).catch((error)=>{
+                console.log("Error al borrar el horario: " + JSON.stringify(error))
+              }); 
               }
             }
           ]

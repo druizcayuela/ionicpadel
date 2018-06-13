@@ -13,19 +13,20 @@ export class IntroduccionPage {
 
   slides:any[] = [
     {
-      title: "Bienvenido!!!",
-      description: "Esta <b>aplicación</b> nos ayudará a comprender muchos temas interesantes en ionic!",
-      image: "assets/img/ica-slidebox-img-1.png",
+      image: "assets/imgs/1bis.jpg",
+      color: "#00a68c",
     },
     {
-      title: "¿Qué es ionic?",
-      description: "<b>Ionic Framework</b> es un SDK abierto que le permite a los desarrolladores crear aplicaciones móviles de alta calidad con el conocimiento de JavaScript, CSS y HTML.",
-      image: "assets/img/ica-slidebox-img-2.png",
+      image: "assets/imgs/2bis.jpg",
+      color: "#bc6ca7",
     },
     {
-      title: "¿Que hace esta app?",
-      description: "Esta aplicación nos ayudará a conocer más sobre el ciclo de vida de un componente y el storage!",
-      image: "assets/img/ica-slidebox-img-3.png",
+      image: "assets/imgs/3bis.jpg",
+      color: "#00b9d1",
+    },
+    {
+      image: "assets/imgs/4bis.jpg",
+      color: "#ec9787",
     }
   ];
   

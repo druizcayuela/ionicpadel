@@ -2,7 +2,7 @@
 
     <ion-navbar color="secondary" no-border-bottom>
         <ion-title text-center>
-            Mis Perfil
+            Mi perfil
         </ion-title>
         <ion-buttons>
             <button ion-button icon-only (click)="mostrarMenu()">
@@ -32,26 +32,26 @@
             <ion-list>
                 <ion-item>
                     <ion-icon name="person" item-start></ion-icon>
-                    <ion-label floating>Nombre: *</ion-label>
+                    <ion-label floating>Nombre *</ion-label>
                     <ion-input formControlName="nombre" type="text" placeholder="Nombre"></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-icon name="person" item-start></ion-icon>
-                    <ion-label floating>Apellidos:</ion-label>
+                    <ion-label floating>Apellidos</ion-label>
                     <ion-input formControlName="apellidos" type="text" placeholder="Apellidos"></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-icon name="call" item-start></ion-icon>
-                    <ion-label floating>Telefono: *</ion-label>
+                    <ion-label floating>Teléfono *</ion-label>
                     <ion-input formControlName="telefono" type="number" placeholder="Telefono"></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-icon name="tennisball" item-start></ion-icon>
-                    <ion-label floating>Posicion de juego:</ion-label>
+                    <ion-label floating>Posición de juego</ion-label>
                     <ion-select formControlName="posicion">
                         <ion-option value="reves">Réves</ion-option>
                         <ion-option value="derecha">Drive</ion-option>
-                        <ion-option value="ambas">Ambas</ion-option>
+                        <ion-option value="ambas">Sin preferencia</ion-option>
                     </ion-select>
                 </ion-item>
                 <br />

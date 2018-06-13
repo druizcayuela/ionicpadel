@@ -22,7 +22,7 @@ export class HomePage {
 
   showAlert() {
     const alert = this.alertCtrl.create({
-      title: 'Opcion no disponible',
+      title: 'Opción no disponible',
       subTitle: 'Estamos trabajando en ello, le informaremos en cuanto esté disponible.',
       buttons: ['OK']
     });

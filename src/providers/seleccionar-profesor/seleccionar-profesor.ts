@@ -18,7 +18,9 @@ export class SeleccionarProfesorProvider {
       img: profesor.img,
       telefono: profesor.telefono,
       lugar: profesor.lugar,
-      id: profesor.id
+      id: profesor.id,
+      texto: profesor.texto,
+      ciudad: profesor.ciudad
     }
   }
 

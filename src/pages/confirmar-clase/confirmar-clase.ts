@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ModalController, AlertController } from 'ionic-angular';
 import { IProfesor } from '../../interfaces/IProfesor';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { UsuarioProvider } from '../../providers/usuario/usuario';
 import { HomePage } from '../home/home';
 import { IClaseReservada } from '../../interfaces/IClaseReservada';
 import { SeleccionarProfesorProvider } from '../../providers/seleccionar-profesor/seleccionar-profesor';
+import { ModalDetalleProfesorPage } from '../modal-detalle-profesor/modal-detalle-profesor';
 
 
 @IonicPage()
@@ -24,7 +25,9 @@ export class ConfirmarClasePage {
   claseReservada: IClaseReservada;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private loadingCtrl: LoadingController,
-              private afDB: AngularFireDatabase, private usuario: UsuarioProvider, private selecProf: SeleccionarProfesorProvider) {
+              private afDB: AngularFireDatabase, private usuario: UsuarioProvider, 
+              private selecProf: SeleccionarProfesorProvider, private modalCtrl: ModalController,
+              private alertCtrl: AlertController) {
     this.profesor = this.selecProf.profesorSeleccionado;
     this.hora = this.navParams.get("hora");
     this.fecha = this.navParams.get("fecha");
@@ -33,6 +36,12 @@ export class ConfirmarClasePage {
     this.loading = this.loadingCtrl.create({
       content: "Por favor, espere...",
     });
+  }
+
+  verDetalleProfesor(profesor: any){
+    this.selecProf.cargarProfesorSeleccionado(profesor);
+    let modal = this.modalCtrl.create(ModalDetalleProfesorPage);
+    modal.present();
   }
 
   confirmarClase(){
@@ -57,15 +66,68 @@ export class ConfirmarClasePage {
 
     let key = this.claseReservada.idAlumno + this.claseReservada.fechaId + this.claseReservada.horaId;
 
-    this.afDB.object( `/horario/${this.profesor.id}/${idFecha}/submenu/${this.hora}`)
-          .update({ idAlumno: this.usuario.usuario.uid})
-          .then(()=>{
-            this.afDB.object(`/clases/${key}`).update(this.claseReservada).then(()=>{
-              this.loading.dismiss().then(()=>{
-                this.navCtrl.setRoot(HomePage, {}, {animate: true, direction: 'forward'});
-              });
+    this.comprobarSiLaHoraEstDisponibleParaElUsuario(key).then( (horaDisponible: boolean)=>{
+      console.log("ComprobarHora " + horaDisponible);
+      if(horaDisponible){
+        this.afDB.object( `/horario/${this.profesor.id}/${idFecha}/submenu/${this.hora}`)
+        .update({ idAlumno: this.usuario.usuario.uid})
+        .then(()=>{
+          this.afDB.object(`/clases/${key}`).update(this.claseReservada).then(()=>{
+            this.loading.dismiss().then(()=>{
+              this.presentAlert();
             });
-          });  
+          });
+        });  
+      }else{
+        this.loading.dismiss().then(()=>{
+          this.presentErrorAlert();
+        });
+      }
+    });
+  }
+
+  comprobarSiLaHoraEstDisponibleParaElUsuario(key){
+    return new Promise((resolve, reject)=>{
+      
+      this.afDB.object(`/clases/${key}`).snapshotChanges().subscribe((data)=>{
+        if(JSON.stringify(data.payload) == "null"){
+          resolve(true);
+        }
+        resolve(false);
+      });
+    });
+  }
+
+  presentAlert() {
+    let alert = this.alertCtrl.create({
+      title: '¡Clase reservada!',
+      message: 'Puedes ver tus clases, desde el menú de navegación en Mis clases.',
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.navCtrl.setRoot(HomePage, {}, {animate: true, direction: 'forward'});
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  presentErrorAlert() {
+    let alert = this.alertCtrl.create({
+      title: '¡No se pudo reservar clase!',
+      message: 'Ya tienes esa hora y fecha programada con otro profesor, por favor, revisa tus clases desde Mis clases.',
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.navCtrl.pop();
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
 }

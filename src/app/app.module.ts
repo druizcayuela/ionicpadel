@@ -36,6 +36,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { LogoutProvider } from '../providers/logout/logout';
 import { SalirPage } from '../pages/salir/salir';
 import { GooglePlus } from '@ionic-native/google-plus';
+import { ElegirCiudadPage } from '../pages/elegir-ciudad/elegir-ciudad';
 
 
 export const firebaseConfig = {
@@ -59,7 +60,8 @@ export const firebaseConfig = {
     ReservarHoraPage,
     ConfirmarClasePage,
     MiPerfilPage,
-    SalirPage
+    SalirPage,
+    ElegirCiudadPage
   ],
   imports: [
     BrowserModule,
@@ -84,7 +86,8 @@ export const firebaseConfig = {
     ReservarHoraPage,
     ConfirmarClasePage,
     MiPerfilPage,
-    SalirPage
+    SalirPage,
+    ElegirCiudadPage
   ],
   providers: [
     StatusBar,

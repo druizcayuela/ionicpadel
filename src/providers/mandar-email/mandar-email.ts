@@ -9,7 +9,6 @@ export class MandarEmailProvider {
 
   constructor(private iab: InAppBrowser, private emailComposer: EmailComposer, private platform: Platform,
               private usuario: UsuarioProvider) {
-    console.log('Hello MandarEmailProvider Provider');
   }
 
   mandarEmail(nombreProfesor: string, emailProfesor: string){
@@ -21,7 +20,7 @@ export class MandarEmailProvider {
         let email = {
           to: emailProfesor,
           subject: 'Pregunta de ' + this.usuario.usuario.nombre,
-          body: 'Buenas profesor ' + nombreProfesor + ' , necesito hacerte la siguiente pregunta.',
+          body: 'Buenas ' + nombreProfesor + ' , necesito hacerte la siguiente pregunta:',
           isHtml: true
         };
         this.emailComposer.open(email);
@@ -32,7 +31,7 @@ export class MandarEmailProvider {
 
      //Sino esta disponible, mandamos con un comando HTML5
      let htmlLink = "mailto:" + emailProfesor + "?subject=Pregunta de "+ this.usuario.usuario.nombre 
-     + "&body=Buenas profesor " + nombreProfesor + " , necesito hacerte la siguiente pregunta.";
+     + "&body=Buenas " + nombreProfesor + " , necesito hacerte la siguiente pregunta:";
      htmlLink = htmlLink.replace(/ /g, "%20");
      this.iab.create( htmlLink, "_system" );
   }

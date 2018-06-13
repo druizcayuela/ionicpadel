@@ -6,6 +6,7 @@ import { ModalDetalleProfesorPage } from '../modal-detalle-profesor/modal-detall
 import { ReservarHoraPage } from '../reservar-hora/reservar-hora';
 import { SeleccionarProfesorProvider } from '../../providers/seleccionar-profesor/seleccionar-profesor';
 import { UsuarioProvider } from '../../providers/usuario/usuario';
+import { ElegirCiudadPage } from '../elegir-ciudad/elegir-ciudad';
 
 @IonicPage()
 @Component({
@@ -15,11 +16,35 @@ import { UsuarioProvider } from '../../providers/usuario/usuario';
 export class ReservarClasePage {
 
   profesores: Observable<any[]>;
+  ciudadElegida:string = "";
+
+  callback = data => {
+    this.ciudadElegida = data;
+    if(!this.ciudadElegida){
+      this.profesores = this.afDB.list('profesor').valueChanges();
+    }else{
+      this.profesores = this.afDB.list('profesor', 
+                            ref => ref.orderByChild('ciudad').equalTo(this.ciudadElegida)).valueChanges();
+    }
+  };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private selecProf: SeleccionarProfesorProvider,
               private modalCtrl: ModalController, private afDB: AngularFireDatabase, private usuarioProv: UsuarioProvider) {
+  
+      this.profesores = this.afDB.list('profesor').valueChanges();
+  }
 
-    this.profesores = this.afDB.list('profesor').valueChanges();
+  abrirElegirCiudad() {
+    this.navCtrl.push(ElegirCiudadPage, {
+      callback: this.callback
+    });
+  }
+
+  checkCiudad(){
+    if(this.ciudadElegida){
+      return true;
+    }
+    return false;
   }
 
   seleccionarProfesor(profesor: any){

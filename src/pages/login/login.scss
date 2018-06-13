@@ -1,13 +1,7 @@
 page-login {
     ion-content {
-        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1b577b+0,2989d8+50,207cca+51,341a4a+100 */
-        background: #1b577b;
-        /* Old browsers */
-        background: -moz-linear-gradient(-45deg, #1b577b 0%, #2989d8 50%, #207cca 51%, #341a4a 100%);
-        /* FF3.6-15 */
-        background: -webkit-linear-gradient(-45deg, #1b577b 0%, #2989d8 50%, #207cca 51%, #341a4a 100%);
-        /* Chrome10-25,Safari5.1-6 */
-        background: linear-gradient(135deg, #1b577b 0%, #2989d8 50%, #207cca 51%, #341a4a 100%);
+        background-image: url('../../assets/img/fondoInicioAPP.png');
+        background-size: 100% 100%;
     }
     img {
         width: 150px;
@@ -15,11 +9,11 @@ page-login {
     h3 {
         color: white
     }
-    .top-20 {
-        margin-top: 20%;
+    .top-50 {
+        margin-top: 50%;
     }
-    .top-5 {
-        margin-top: 5%;
+    .top-15 {
+        margin-top: 15%;
     }
     .sobre-esta-app {
         text-decoration: underline;

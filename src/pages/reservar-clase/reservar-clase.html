@@ -13,11 +13,24 @@
         <ion-list-header>
             Elige un profesor
         </ion-list-header>
+
+        <button *ngIf="!checkCiudad()" detail-none ion-item (click)="abrirElegirCiudad()">
+           Todas las provincias
+            <ion-icon name="pin" item-start ></ion-icon>
+        </button>
+
+        <button *ngIf="checkCiudad()" detail-none ion-item (click)="abrirElegirCiudad()">
+            {{ ciudadElegida }}
+            <ion-icon name="pin" item-start ></ion-icon>
+        </button>
+
         <button detail-none ion-item *ngFor="let profesor of profesores | async" (click)="seleccionarProfesor(profesor)">
             {{ profesor.nombre }} {{ profesor.apellidos }}
-            <ion-icon *ngIf="checkFavorito(profesor)" name="star" item-end (click)="quitarFavorito(profesor, $event)"></ion-icon>
+            <ion-icon style="color: rgb(223, 223, 26);" *ngIf="checkFavorito(profesor)" name="star" item-end (click)="quitarFavorito(profesor, $event)"></ion-icon>
             <ion-icon *ngIf="!checkFavorito(profesor)" name="star-outline" item-end (click)="agregarFavorito(profesor, $event)"></ion-icon>
-            <ion-icon name="person" item-end (click)="verDetalleProfesor(profesor, $event)"></ion-icon>
+            <ion-avatar item-start (click)="verDetalleProfesor(profesor, $event)">
+                <img [src]="profesor.img">
+            </ion-avatar>
         </button>
 
     </ion-list>

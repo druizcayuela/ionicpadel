@@ -5,9 +5,8 @@
         </ion-title>
         <ion-buttons start>
             <button ion-button (click)="dismiss()">
-        <span ion-text showWhen="ios">Cancelar</span>
-        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
-      </button>
+            <ion-icon name="md-close"></ion-icon>
+        </button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
@@ -20,8 +19,8 @@
             <ion-card-title>
                 {{profesor.nombre}} {{profesor.apellidos}}
             </ion-card-title>
-            <p>
-                The most popular industrial group ever, and largely responsible for bringing the music to a mass audience.
+            <p text-justify>
+                {{profesor.texto}}
             </p>
         </ion-card-content>
 

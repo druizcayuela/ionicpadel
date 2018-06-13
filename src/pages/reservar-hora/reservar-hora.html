@@ -14,18 +14,18 @@
         </ion-refresher-content>
     </ion-refresher>
 
-    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+    <ion-searchbar placeholder="Busca tu clase por día" (ionInput)="getItems($event)"></ion-searchbar>
 
     <ion-list>
         <ion-list-header>
-            Elige una hora
+            Elige una hora del día
         </ion-list-header>
         <ion-item-group *ngFor="let horario of horarios">
 
             <ion-item-divider *ngIf="tieneHoraDisponible(horario.submenu)" color="light"> {{ horario.fecha }}</ion-item-divider>
 
             <div *ngFor="let entry of horario.submenu | primerPipe">
-                <button *ngIf="entry.value.idAlumno == -1" detail-none ion-item (click)="seleccionarHora(horario.fecha, entry.key, entry.value.hora)">
+                <button *ngIf="entry.value.idAlumno == -1" text-center detail-none ion-item (click)="seleccionarHora(horario.fecha, entry.key, entry.value.hora)">
                     {{entry.value.hora}}
                 </button>
             </div>
