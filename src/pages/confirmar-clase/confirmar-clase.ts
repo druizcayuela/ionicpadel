@@ -67,11 +67,9 @@ export class ConfirmarClasePage {
     let key = this.claseReservada.idAlumno + this.claseReservada.fechaId + this.claseReservada.horaId;
 
     this.comprobarSiLaHoraEstDisponibleParaElUsuario(key).then( (horaDisponible: boolean)=>{
-      console.log("ComprobarHora " + horaDisponible);
       if(horaDisponible){
         this.afDB.object( `/horario/${this.profesor.id}/${idFecha}/submenu/${this.hora}`)
-        .update({ idAlumno: this.usuario.usuario.uid})
-        .then(()=>{
+        .update({ idAlumno: this.usuario.usuario.uid}).then(()=>{
           this.afDB.object(`/clases/${key}`).update(this.claseReservada).then(()=>{
             this.loading.dismiss().then(()=>{
               this.presentAlert();

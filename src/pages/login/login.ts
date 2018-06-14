@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, Platform } from 'ionic-angular';
-
-import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
 import { UsuarioProvider } from '../../providers/usuario/usuario';
 import { HomePage } from '../home/home';
 
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 import { Facebook } from '@ionic-native/facebook';
+
 import { IntroduccionPage } from '../introduccion/introduccion';
 
 import { GooglePlus } from '@ionic-native/google-plus';
@@ -64,7 +64,7 @@ export class LoginPage {
           'google'
         );
         this.navCtrl.setRoot(HomePage);
-      });
+      }).catch(e => console.log('Error con el login de Google en modo escritorio' + JSON.stringify(e)));
     }
   }
 
@@ -87,7 +87,7 @@ export class LoginPage {
               this.navCtrl.setRoot(HomePage);
 
 
-            }).catch(e => console.log('Error con el login' + JSON.stringify(e)));
+            }).catch(e => console.log('Error con el login de FB en modo nativo' + JSON.stringify(e)));
       })
     }else{
       //Escritorio
@@ -103,7 +103,7 @@ export class LoginPage {
           'facebook'
         );
         this.navCtrl.setRoot(HomePage);
-      });
+      }).catch(e => console.log('Error con el login de FB en modo escritorio' + JSON.stringify(e)));
     }
 
 
